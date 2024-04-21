@@ -6,7 +6,7 @@ static GetAllData() {
 // Open SQLite database
 const db = new sqlite3.Database('songs.db');
 
-const query = 'SELECT * FROM songs;';
+const query = 'SELECT * FROM song;';
 
 // Execute the query
 db.all(query, (err, rows) => {
