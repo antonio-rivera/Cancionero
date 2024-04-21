@@ -1,9 +1,9 @@
 export class Song  {
-  ID: Number
-  title: String
-  lyrics: String
-  genre: String
-  artist: String
+  ID: number
+  title: string
+  lyrics: string
+  genre: string
+  artist: string
   constructor({ID, title, lyrics, genre, artist}: any)
   {
     this.ID = ID;
