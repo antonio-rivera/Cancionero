@@ -49,30 +49,5 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sqlite3": "^5.1.7"
-  },
-  "config": {
-    "forge": {
-      "plugins": [
-        {
-          "name": "@electron-forge/plugin-webpack",
-          "config": {
-            "mainConfig": "./webpack.main.config.ts",
-            "renderer": {
-              "config": "./webpack.renderer.config.ts",
-              "entryPoints": [
-                {
-                  "name": "main_window",
-                  "html": "./src/index.html",
-                  "js": "./src/index.ts",
-                  "preload": {
-                    "js": "./src/preload.ts"
-                  }
-                }
-              ]
-            }
-          }
-        }
-      ]
-    }
   }
 }
