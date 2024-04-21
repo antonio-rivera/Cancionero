@@ -2,30 +2,37 @@ import sqlite3 from "sqlite3"
 
 export class SongRepository
 {
-static GetAllData() {
-// Open SQLite database
-const db = new sqlite3.Database('songs.db');
+    static async GetAllData() {
+    try {
+        // Open SQLite database
+        const db = new sqlite3.Database('songs.db');
 
-const query = 'SELECT * FROM song;';
+        const query = 'SELECT * FROM song;';
+        
+        // Wrap the db.all() call with a Promise
+        const rows = await new Promise((resolve, reject) => {
+            db.all(query, (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
 
-// Execute the query
-db.all(query, (err, rows) => {
-    if (err) {
+        // Close the database connection
+        db.close((err) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log('Database connection closed.');
+            }
+        });
+        return rows; // Return the retrieved rows
+    } catch (err) {
         console.error(err.message);
-        return;
+        throw err; // Re-throw the error for handling higher up
     }
-
-
-    // Close the database connection
-    db.close(err => {
-        if (err) {
-            return console.error(err.message);
-        }
-        console.log('Database connection closed.');
-        return rows
-    });
-});
 }  
-
+    
 }
-
