@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Song} from "./models/Song";
-
+import { Header } from "./components/Header"
+import "/Users/antonio/Desktop/WebDevStuff/React/cancionero/my-new-app/bootstrap/css/bootstrap.min.css"
  function App() {
   const [data, setData] = useState<Array<Song>>(null); 
 
@@ -14,7 +15,7 @@ import { Song} from "./models/Song";
 
   return (
     <>
-    <h1>Hello from React</h1>
+    <Header />
     </>
   )
 }
