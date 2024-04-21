@@ -17,5 +17,8 @@
       "*": ["node_modules/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "files": [
+    "./interface.d.ts"
+  ]
 }
