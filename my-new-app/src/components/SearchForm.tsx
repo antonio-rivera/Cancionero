@@ -11,16 +11,17 @@ type Props =
 export function SearchForm({ songs }: Props) {
 
   const [query, setQuery] = useState<string>("")
-  let searchResults: Array<Song>;
+  const [searchResults, setSearchResults] = useState<Song[]>()
   const [haveResults, setHaveResults] = useState<boolean>(false)
   const [foundText, setNotFoundText] = useState(null)
 
   function handleSubmit(event: React.MouseEvent) {
     event.preventDefault();
     if (query) {
-      searchResults = searchUtilsModule.matchResults(query, songs)
-      setHaveResults(searchResults?.length > 0);
-      if (searchResults?.length === 0) {
+      let results = searchUtilsModule.matchResults(query, songs)
+      setSearchResults(results);
+      setHaveResults(results?.length > 0);
+      if (results?.length === 0) {
         setNotFoundText(<h3 className="text-center mb-5 text-muted">No se encontro la cancion que busco. Trate de nuevo</h3>);
       }
 
