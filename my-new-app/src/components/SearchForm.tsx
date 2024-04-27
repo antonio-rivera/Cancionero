@@ -13,8 +13,7 @@ export function SearchForm({ songs }: Props) {
   const [query, setQuery] = useState<string>("")
   let searchResults: Array<Song>;
   const [haveResults, setHaveResults] = useState<boolean>(false)
-  // TODO: Store notFoundText as state so that it renders on change
-  let notFoundText = null;
+  const [foundText, setNotFoundText] = useState(null)
 
   function handleSubmit(event: React.MouseEvent) {
     event.preventDefault();
@@ -22,8 +21,11 @@ export function SearchForm({ songs }: Props) {
       searchResults = searchUtilsModule.matchResults(query, songs)
       setHaveResults(searchResults?.length > 0);
       if (searchResults?.length === 0) {
+        setNotFoundText(<h3 className="text-center mb-5 text-muted">No se encontro la cancion que busco. Trate de nuevo</h3>);
+      }
 
-        notFoundText = <h3 className="text-center mb-5 text-muted">No se encontro la cancion que busco. Trate de nuevo</h3>;
+      else {
+        setNotFoundText(null)
       }
     }
 
@@ -37,7 +39,7 @@ export function SearchForm({ songs }: Props) {
       <button className="btn btn-primary mt-3" id="search-button" type="submit" onClick={(event) => handleSubmit(event)}>Buscar</button>
     </form>
       <TableResults haveResults={haveResults} results={searchResults} />
-      {notFoundText}
+      {foundText}
     </>
 
   )
