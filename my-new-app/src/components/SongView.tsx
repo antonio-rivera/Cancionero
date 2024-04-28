@@ -7,16 +7,12 @@ export function SongView({ songs }: Props) {
     if (currentSong) {
       const { title, artist, lyrics } = currentSong;
       return <>
-        <div className="card">
-          <div className="card-body">
-            <h1 className="text-center card-title">{title}</h1>
-            <h3 className="card-subtitle text-center">{artist}</h3>
-            <div className="container">
-              <p className="pt-5 card-text text-center">
-                {lyrics}
-              </p>
-            </div>
-          </div>
+        <div className="mt-4 container-fluid">
+          <h1 className="text-center">{title}</h1>
+          <h3 className="text-center">{artist}</h3>
+          <p className="pt-2 text-center">
+            {lyrics}
+          </p>
         </div>
       </>
 
