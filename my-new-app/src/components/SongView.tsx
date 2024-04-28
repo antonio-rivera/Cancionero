@@ -1,5 +1,6 @@
 import { Props } from "../../interface"
 import { useParams } from "react-router-dom"
+import { ScrollerControls } from "./ScrollerControls";
 export function SongView({ songs }: Props) {
   const { id } = useParams()
   if (songs) {
@@ -14,6 +15,7 @@ export function SongView({ songs }: Props) {
             {lyrics}
           </p>
         </div>
+        <ScrollerControls />
       </>
 
     }
