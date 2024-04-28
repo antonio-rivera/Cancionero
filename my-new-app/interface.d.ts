@@ -7,3 +7,8 @@ declare global {
     DB: IDatabaseApi
   }
 }
+
+export type Props =
+  {
+    songs: Array<Song>
+  }
