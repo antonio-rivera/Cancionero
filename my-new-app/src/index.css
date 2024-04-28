@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('./assets/Roboto/Roboto-Light.ttf');
+}
 p {
   white-space: pre-line;
+  font-family: Roboto;
+  font-size: 2.5rem;
+  font-weight: 600;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
