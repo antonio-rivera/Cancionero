@@ -2,11 +2,8 @@ import { useState } from "react";
 import { Song } from "../models/Song";
 import { searchUtilsModule } from "../utils/searchUtils";
 import { TableResults } from "./TableResults";
+import { Props } from "../../interface";
 
-type Props =
-  {
-    songs: Array<Song>
-  }
 
 export function SearchForm({ songs }: Props) {
 
