@@ -10,3 +10,9 @@ p {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+
+#song-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
