@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Song } from "../models/Song"
 
 type Props =
@@ -18,7 +19,11 @@ export function TableResults({ haveResults, results }: Props) {
           </tr>
           {results.map(song =>
             <tr key={song.ID}>
-              <td>{song.title}</td>
+              <td className="link-primary">
+                <Link to={`song/${song.ID}`}>
+                  {song.title}
+                </Link>
+              </td>
               <td>{song.artist}</td>
               <td>{song.genre}</td>
             </tr>
