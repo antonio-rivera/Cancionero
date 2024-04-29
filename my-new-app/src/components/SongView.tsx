@@ -11,7 +11,7 @@ export function SongView({ songs }: Props) {
         <div className="mt-4 container-fluid">
           <h1 className="text-center">{title}</h1>
           <h3 className="text-center">{artist}</h3>
-          <p className="pt-2 text-center">
+          <p className="pt-2 pb-5 text-center">
             {lyrics}
           </p>
         </div>
