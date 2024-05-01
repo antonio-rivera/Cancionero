@@ -5,6 +5,7 @@ import "/Users/antonio/Desktop/WebDevStuff/React/cancionero/my-new-app/bootstrap
 import { SearchForm } from "./components/SearchForm";
 import { Route, Routes } from "react-router-dom";
 import { SongView } from "./components/SongView";
+import { BrowseView } from "./components/BrowseView";
 function App() {
   const [data, setData] = useState<Array<Song>>(null);
 
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SearchForm songs={data} />} />
         <Route path="/song/:id" element={<SongView songs={data} />} />
+        <Route path="/browse" element={<BrowseView songs={data} />} />
       </Routes>
     </>
   )
