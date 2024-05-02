@@ -32,7 +32,7 @@ export function ScrollerControls() {
     }
   }
   return <>
-    <div id="song-footer" className="bg-white d-flex justify-content- align-items-center">
+    <div id="song-footer" className="bg-white d-flex justify-content-center align-items-center">
       <div className="row m-auto">
         <div className="h4 text-dark text-center mr-3">Empezar desplazamiento: </div>
         <button onClick={() => startAutoScroll(150)} className="btn btn-outline-dark rounded">Velocidad 1.0</button>
