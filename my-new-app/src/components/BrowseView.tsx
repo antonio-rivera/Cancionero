@@ -1,7 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { Props } from "../../interface";
+import { useEffect, useState } from "react";
 
 export function BrowseView({ songs }: Props) {
+  const [genres, setGenres] = useState<string[]>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response: string[] = await window.DB.getAllGenres()
+      console.log(response);
+      setGenres(response)
+    }
+    fetchData()
+  }, [])
+
   const navigate = useNavigate();
   function goToSong(ID: number): void {
     navigate(`/song/${ID}`)
