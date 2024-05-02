@@ -34,8 +34,9 @@ const createWindow = (): void => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  ipcMain.handle("getall", SongRepository.GetAllData)
-  createWindow()
+  ipcMain.handle("getall", SongRepository.GetAllData);
+  ipcMain.handle("getgenres", SongRepository.GetAllGenres);
+  createWindow();
 }
 );
 

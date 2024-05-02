@@ -1,5 +1,6 @@
 export interface IDatabaseApi {
   getAllData: () => Promise<any>,
+  getAllGenres: () => Promise<any>
 }
 
 declare global {
