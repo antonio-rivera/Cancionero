@@ -18,10 +18,15 @@ export function AddSong() {
     });
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // You can handle form submission logic here
-    console.log(formData);
+    try {
+      await window.DB.addSong(formData);
+
+    } catch (error) {
+      console.error(error);
+    }
+
     // Reset form fields after submission
     setFormData({
       ID: null,
