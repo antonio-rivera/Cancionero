@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function ScrollerControls() {
   let clearId: string | number | NodeJS.Timeout;
   let startedScrolling: boolean = false;
@@ -33,14 +35,12 @@ export function ScrollerControls() {
   }
   return <>
     <div id="song-footer" className="bg-white d-flex justify-content-center align-items-center">
-      <div className="row m-auto">
-        <div className="h4 text-dark text-center mr-3">Empezar desplazamiento: </div>
-        <button onClick={() => startAutoScroll(150)} className="btn btn-outline-dark rounded">Velocidad 1.0</button>
-        <button onClick={() => startAutoScroll(100)} className="btn btn-outline-dark rounded">Velocidad 2.0</button>
-        <button onClick={() => startAutoScroll(50)} className="btn btn-outline-dark rounded">Velocidad 3.0</button>
-        <button onClick={stopScrolling} className="btn btn-danger rounded">Detener desplazamiento</button>
-      </div>
-
+      <Link to={`add`}><button id="edit-btn" className="mx-1 btn btn-success">Editar Canción</button> </Link>
+      <div className="h4 text-dark text-center mr-3">Empezar desplazamiento: </div>
+      <button onClick={() => startAutoScroll(150)} className=" btn btn-outline-dark rounded">Velocidad 1.0</button>
+      <button onClick={() => startAutoScroll(100)} className=" btn btn-outline-dark rounded">Velocidad 2.0</button>
+      <button onClick={() => startAutoScroll(50)} className=" btn btn-outline-dark rounded">Velocidad 3.0</button>
+      <button onClick={stopScrolling} className=" btn btn-danger rounded">Detener desplazamiento</button>
     </div>
   </>
 }

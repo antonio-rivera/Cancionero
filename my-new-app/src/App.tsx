@@ -27,6 +27,7 @@ function App() {
         <Route path="/song/:id" element={<SongView songs={data} />} />
         <Route path="/browse" element={<BrowseView songs={data} />} />
         <Route path="/add" element={<AddSong updateData={updateData} />} />
+        <Route path="/edit/:id" element={<AddSong updateData={updateData} />} />
       </Routes>
     </>
   )
