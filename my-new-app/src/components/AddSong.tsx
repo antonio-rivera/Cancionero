@@ -84,7 +84,7 @@ export function AddSong() {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary">Someter</button>
+        <button type="submit" className="mb-2 btn btn-primary">Someter</button>
       </form>
     </div>
   );
