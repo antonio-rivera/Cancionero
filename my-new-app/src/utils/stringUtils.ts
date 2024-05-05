@@ -1,7 +1,7 @@
 const stringUtilsModule = {
   normalizeName(string: string): string {
     try {
-      const name = string.toLowerCase().replaceAll(/[.,"';:<>{}()*&^%$#@!]/, "");
+      const name = string.toLowerCase().replaceAll(/[.,"';:<>{}()*&^%$#@!]/g, "");
       return name.replaceAll(/(\b[a-z])/g, '$1'.toUpperCase()).trim()
 
     } catch (error) {

@@ -79,8 +79,9 @@ export class SongRepository {
 
         const query = 'INSERT INTO song (title, lyrics, genre, artist) VALUES (?, ?, ?, ?)';
 
-        // Normalize artist name before inserting
+        // Normalize artist name and title before inserting
         songToAdd.artist = stringUtilsModule.normalizeName(songToAdd.artist);
+        songToAdd.title = songToAdd.title.toUpperCase();
 
         const runAsync = (statement: string, values: string[]) => {
             return new Promise<InsertResult>((resolve, reject) => {
