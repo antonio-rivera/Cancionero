@@ -1,7 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Song } from "../models/Song";
+import { UpdateProps } from "../../interface";
 
-export function AddSong() {
+export function AddSong({ updateData }: UpdateProps) {
   const [formData, setFormData] = useState<Song>({
     ID: null,
     title: '',
@@ -22,6 +23,7 @@ export function AddSong() {
     e.preventDefault();
     try {
       await window.DB.addSong(formData);
+      updateData();
 
     } catch (error) {
       console.error(error);

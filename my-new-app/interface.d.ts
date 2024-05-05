@@ -16,3 +16,8 @@ export type Props =
   {
     songs: Array<Song>
   }
+
+export type UpdateProps =
+  {
+    updateData: () => void
+  }

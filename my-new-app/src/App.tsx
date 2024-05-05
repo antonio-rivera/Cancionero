@@ -10,12 +10,13 @@ import { AddSong } from "./components/AddSong";
 function App() {
   const [data, setData] = useState<Array<Song>>(null);
 
+  async function updateData() {
+    const response: Array<Song> = await window.DB.getAllData()
+    setData(response)
+  }
+
   useEffect(() => {
-    const fetchData = async () => {
-      const response: Array<Song> = await window.DB.getAllData()
-      setData(response)
-    }
-    fetchData()
+    updateData();
   }, [])
 
   return (
@@ -25,7 +26,7 @@ function App() {
         <Route path="/" element={<SearchForm songs={data} />} />
         <Route path="/song/:id" element={<SongView songs={data} />} />
         <Route path="/browse" element={<BrowseView songs={data} />} />
-        <Route path="/add" element={<AddSong />} />
+        <Route path="/add" element={<AddSong updateData={updateData} />} />
       </Routes>
     </>
   )
