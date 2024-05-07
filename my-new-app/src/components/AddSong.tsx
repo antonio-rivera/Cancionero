@@ -25,7 +25,7 @@ export function AddSong({ updateData }: UpdateProps) {
     e.preventDefault();
     try {
       await window.DB.addSong(formData);
-      updateData();
+      await updateData();
 
     } catch (error) {
       console.error(error);

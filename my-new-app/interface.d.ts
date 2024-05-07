@@ -20,7 +20,7 @@ export type Props =
 
 export type UpdateProps =
   {
-    updateData: () => void
+    updateData: () => Promise<void>
   }
 
 export type EditProps =
