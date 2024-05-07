@@ -2,7 +2,7 @@ const stringUtilsModule = {
   normalizeName(string: string): string {
     try {
       const name = string.toLowerCase().replaceAll(/[.,"';:<>{}()*&^%$#@!]/g, "");
-      return name.replaceAll(/(\b[a-z])/g, (match: string) => match.toUpperCase()).trim();
+      return name.replaceAll(/^([a-zA-Z]|[à-ü]|[À-Ü])| ([a-zA-Z]|[à-ü]|[À-Ü])/g, (match: string) => match.toUpperCase()).trim();
 
 
     } catch (error) {
