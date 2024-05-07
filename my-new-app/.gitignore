@@ -93,3 +93,6 @@ out/
 
 # script  to  seed DB
 seedscript
+
+# DB file inside project
+src/songs.db
