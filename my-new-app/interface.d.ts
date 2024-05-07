@@ -22,6 +22,12 @@ export type UpdateProps =
     updateData: () => void
   }
 
+export type EditProps =
+  {
+    songs: Array<Song>
+    updateData: () => void
+  }
+
 export type FormProps =
   {
     handleInputChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void

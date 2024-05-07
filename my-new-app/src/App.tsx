@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import { SongView } from "./components/SongView";
 import { BrowseView } from "./components/BrowseView";
 import { AddSong } from "./components/AddSong";
+import { EditSong } from "./components/EditSong";
 function App() {
   const [data, setData] = useState<Array<Song>>(null);
 
@@ -27,7 +28,7 @@ function App() {
         <Route path="/song/:id" element={<SongView songs={data} />} />
         <Route path="/browse" element={<BrowseView songs={data} />} />
         <Route path="/add" element={<AddSong updateData={updateData} />} />
-        <Route path="/edit/:id" element={<AddSong updateData={updateData} />} />
+        <Route path="/edit/:id" element={<EditSong updateData={updateData} songs={data} />} />
       </Routes>
     </>
   )
