@@ -2,6 +2,7 @@ import { IDProps } from "../../interface";
 import { Link } from "react-router-dom";
 
 export function ScrollerControls({ id }: IDProps) {
+  window.scrollTo(0, 0);
   let clearId: string | number | NodeJS.Timeout;
   let startedScrolling: boolean = false;
 
@@ -10,8 +11,7 @@ export function ScrollerControls({ id }: IDProps) {
     let velocity = 1;
     stopScrolling();
     startedScrolling = true;
-    let scrollAmount = 0;
-    window.scrollTo(0, 0);
+    let scrollAmount = window.scrollY;
     clearId = setInterval(() => {
       if (changeSpeed && window.scrollY >= Math.floor(window.innerHeight / 2)) {
         interval = interval - 50;
