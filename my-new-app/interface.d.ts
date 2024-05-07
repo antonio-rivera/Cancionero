@@ -21,3 +21,10 @@ export type UpdateProps =
   {
     updateData: () => void
   }
+
+export type FormProps =
+  {
+    handleInputChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+    handleSubmit: (e: FormEvent) => Promise<void>
+    formData: Song
+  }
