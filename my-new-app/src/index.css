@@ -35,6 +35,8 @@ p {
 }
 
 #song-footer {
+  background-color: azure;
+  border-top: solid 0.5px black;
   position: fixed;
   bottom: 0;
   width: 100%;

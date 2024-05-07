@@ -34,7 +34,7 @@ export function ScrollerControls() {
     }
   }
   return <>
-    <div id="song-footer" className="bg-white d-flex justify-content-center align-items-center">
+    <div id="song-footer" className="d-flex justify-content-center align-items-center">
       <Link to={`add`}><button id="edit-btn" className="mx-1 btn btn-success">Editar Canción</button> </Link>
       <div className="h4 text-dark text-center mr-3">Empezar desplazamiento: </div>
       <button onClick={() => startAutoScroll(150)} className=" btn btn-outline-dark rounded">Velocidad 1.0</button>
