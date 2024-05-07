@@ -8,7 +8,6 @@ type InsertResult = {
 }
 
 const dbPath = app.getPath("desktop") + "/songs.db"
-console.log(dbPath);
 
 export class SongRepository {
 
@@ -110,4 +109,38 @@ export class SongRepository {
         }
     }
 
+    static async EditSong(songToEdit: Song) {
+
+        // Open SQLite database
+        const db = new sqlite3.Database(dbPath);
+
+        const query = `UPDATE song SET title = ?, 
+                       lyrics = ?, genre = ?, artist = ?
+                       WHERE ID = ?;`;
+
+        // Normalize artist name and title before inserting
+        songToEdit.artist = stringUtilsModule.normalizeName(songToEdit.artist);
+        songToEdit.title = songToEdit.title.toUpperCase();
+
+        const runAsync = (statement: string, values: string[]) => {
+            return new Promise((resolve, reject) => {
+                db.run(statement, values, function (err) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve({ id: this.lastID });
+                    }
+                });
+            });
+        };
+
+        try {
+            const result = await runAsync(query, [songToEdit.title, songToEdit.lyrics, songToEdit.genre, songToEdit.artist, songToEdit.ID.toString()]);
+            console.log("Update successfully executed");
+        } catch (error) {
+            console.error('Error inserting data:', error);
+        } finally {
+            db.close();
+        }
+    }
 }

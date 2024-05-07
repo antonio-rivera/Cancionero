@@ -37,6 +37,7 @@ app.on('ready', () => {
   ipcMain.handle("getall", SongRepository.GetAllData);
   ipcMain.handle("getgenres", SongRepository.GetAllGenres);
   ipcMain.handle("addsong", (event, song) => SongRepository.AddSong(song));
+  ipcMain.handle("editsong", (event, song) => SongRepository.EditSong(song));
   createWindow();
 }
 );

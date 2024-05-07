@@ -4,6 +4,7 @@ export interface IDatabaseApi {
   getAllData: () => Promise<any>;
   getAllGenres: () => Promise<any>;
   addSong: (song: Song) => Promise<any>;
+  editSong: (song: Song) => Promise<any>;
 }
 
 declare global {
@@ -25,7 +26,7 @@ export type UpdateProps =
 export type EditProps =
   {
     songs: Array<Song>
-    updateData: () => void
+    updateData: () => Promise<void>
   }
 
 export type FormProps =
@@ -34,3 +35,7 @@ export type FormProps =
     handleSubmit: (e: FormEvent) => Promise<void>
     formData: Song
   }
+
+export type IDProps = {
+  id: string
+}
