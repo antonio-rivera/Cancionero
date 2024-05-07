@@ -1,16 +1,21 @@
 import sqlite3 from "sqlite3"
 import { Song } from "../models/Song";
 import stringUtilsModule from "../utils/stringUtils";
+import { app } from "electron";
 
 type InsertResult = {
     id: number
 }
 
+const dbPath = app.getPath("desktop") + "/songs.db"
+console.log(dbPath);
+
 export class SongRepository {
+
     static async GetAllData() {
         try {
             // Open SQLite database
-            const db = new sqlite3.Database('songs.db');
+            const db = new sqlite3.Database(dbPath);
 
             const query = 'SELECT * FROM song;';
 
@@ -43,11 +48,11 @@ export class SongRepository {
     static async GetAllGenres() {
         try {
             // Open SQLite database
-            const db = new sqlite3.Database('songs.db');
+            const db = new sqlite3.Database(dbPath);
 
             const query = 'SELECT DISTINCT song.genre FROM song;';
 
-            // Wrap the db.all() call with a Promise
+            // Wrap the db.all(dbPath) call with a Promise
             const rows = await new Promise((resolve, reject) => {
                 db.all(query, (err, rows) => {
                     if (err) {
@@ -75,7 +80,8 @@ export class SongRepository {
 
     static async AddSong(songToAdd: Song) {
 
-        const db = new sqlite3.Database('songs.db');
+        // Open SQLite database
+        const db = new sqlite3.Database(dbPath);
 
         const query = 'INSERT INTO song (title, lyrics, genre, artist) VALUES (?, ?, ?, ?)';
 
