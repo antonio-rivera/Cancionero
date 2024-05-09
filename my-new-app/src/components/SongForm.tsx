@@ -4,7 +4,6 @@ export function SongForm({ handleInputChange, handleSubmit, formData }: FormProp
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center">Canción Nueva</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">Título</label>

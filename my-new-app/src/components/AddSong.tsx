@@ -41,6 +41,9 @@ export function AddSong({ updateData }: UpdateProps) {
     });
   };
 
-  return <SongForm formData={formData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+  return <>
+    <h2 className="my-2 text-center">Canción Nueva</h2>
+    <SongForm formData={formData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+  </>
 
 };

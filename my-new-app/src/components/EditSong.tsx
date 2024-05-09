@@ -39,6 +39,9 @@ export function EditSong({ updateData, songs }: EditProps) {
 
   };
 
-  return <SongForm formData={formData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+  return <>
+    <h2 className="my-2 text-center">Editar Canción</h2>
+    <SongForm formData={formData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+  </>
 
 };
