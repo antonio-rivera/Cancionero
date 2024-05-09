@@ -39,9 +39,11 @@ export function EditSong({ updateData, songs }: EditProps) {
 
   };
 
-  return <>
+  return <div className="d-flex flex-column justify-content-center">
     <h2 className="my-2 text-center">Editar Canción</h2>
     <SongForm formData={formData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
-  </>
+    <button id="delete-song-btn" className="btn btn-danger">Borrar Canción</button>
+
+  </div>
 
 };

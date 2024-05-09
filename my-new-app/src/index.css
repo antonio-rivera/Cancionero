@@ -50,3 +50,9 @@ p {
 #edit-btn {
   z-index: 1;
 }
+
+#delete-song-btn{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
