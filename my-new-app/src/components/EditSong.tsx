@@ -4,6 +4,7 @@ import { EditProps } from "../../interface";
 import { useParams } from "react-router-dom";
 import { SongForm } from "./SongForm";
 import { useNavigate } from "react-router-dom";
+import ConfirmDeletionModal from "./ConfirmDeleteModal";
 
 export function EditSong({ updateData, songs }: EditProps) {
 
@@ -13,8 +14,15 @@ export function EditSong({ updateData, songs }: EditProps) {
     editSong = songs.find(song => song.ID === Number(id))
   }
 
+  // States to handle modal display ///////
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  /////////////////////////////////////////
+
   const [formData, setFormData] = useState<Song>(editSong);
   const navigate = useNavigate();
+
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -39,11 +47,12 @@ export function EditSong({ updateData, songs }: EditProps) {
 
   };
 
-  return <div className="d-flex flex-column justify-content-center">
+  return <><div className="d-flex flex-column justify-content-center">
     <h2 className="my-2 text-center">Editar Canción</h2>
     <SongForm formData={formData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
-    <button id="delete-song-btn" className="btn btn-danger">Borrar Canción</button>
-
+    <button id="delete-song-btn" onClick={handleShow} className="btn btn-danger">Borrar Canción</button>
   </div>
+    <ConfirmDeletionModal song={formData} show={show} handleClose={handleClose} />
+  </>
 
 };

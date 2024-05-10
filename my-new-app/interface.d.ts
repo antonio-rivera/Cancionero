@@ -39,3 +39,10 @@ export type FormProps =
 export type IDProps = {
   id: string
 }
+
+export type ModalProps = {
+  song: Song;
+  show: boolean;
+  handleClose: () => void;
+  // handleShow: () => void;
+}
