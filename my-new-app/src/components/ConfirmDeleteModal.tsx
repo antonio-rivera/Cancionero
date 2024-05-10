@@ -1,8 +1,25 @@
 import { ModalProps } from "../../interface";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from "react-router-dom";
 
-function ConfirmDeletionModal({ song, handleClose, show }: ModalProps) {
+function ConfirmDeletionModal({ song, updateData, handleClose, show }: ModalProps) {
+
+  const navigate = useNavigate();
+
+  async function sendDeleteRequest() {
+    try {
+      await window.DB.deleteSong(song.ID);
+      await updateData();
+      handleClose()
+
+    } catch (error) {
+      console.error("Could not send delete request", error);
+    }
+    navigate("/browse")
+
+  }
+
   return (
     <div
       className="modal show"
@@ -19,7 +36,7 @@ function ConfirmDeletionModal({ song, handleClose, show }: ModalProps) {
 
         <Modal.Footer>
           <Button onClick={handleClose} variant="secondary">Cancelar</Button>
-          <Button variant="danger">Confirmar</Button>
+          <Button onClick={sendDeleteRequest} variant="danger">Confirmar</Button>
         </Modal.Footer>
       </Modal>
     </div>

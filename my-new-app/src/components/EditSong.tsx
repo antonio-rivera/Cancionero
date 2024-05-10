@@ -52,7 +52,7 @@ export function EditSong({ updateData, songs }: EditProps) {
     <SongForm formData={formData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
     <button id="delete-song-btn" onClick={handleShow} className="btn btn-danger">Borrar Canción</button>
   </div>
-    <ConfirmDeletionModal song={formData} show={show} handleClose={handleClose} />
+    <ConfirmDeletionModal updateData={updateData} song={formData} show={show} handleClose={handleClose} />
   </>
 
 };

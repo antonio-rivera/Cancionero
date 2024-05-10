@@ -143,4 +143,33 @@ export class SongRepository {
             db.close();
         }
     }
+
+    static async DeleteSong(id: number) {
+
+        // Open SQLite database
+        const db = new sqlite3.Database(dbPath);
+
+        const query = `DELETE FROM Song WHERE ID = ?;`;
+
+        const runAsync = (statement: string, values: string[]) => {
+            return new Promise((resolve, reject) => {
+                db.run(statement, values, function (err) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve({ id: this.lastID });
+                    }
+                });
+            });
+        };
+
+        try {
+            const result = await runAsync(query, [id.toString()]);
+            console.log("Delete successfully executed");
+        } catch (error) {
+            console.error('Error data:', error);
+        } finally {
+            db.close();
+        }
+    }
 }

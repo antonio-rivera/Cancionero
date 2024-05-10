@@ -5,6 +5,7 @@ export interface IDatabaseApi {
   getAllGenres: () => Promise<any>;
   addSong: (song: Song) => Promise<any>;
   editSong: (song: Song) => Promise<any>;
+  deleteSong: (id: number) => Promise<any>;
 }
 
 declare global {
@@ -44,5 +45,5 @@ export type ModalProps = {
   song: Song;
   show: boolean;
   handleClose: () => void;
-  // handleShow: () => void;
+  updateData: () => Promise<void>;
 }
