@@ -56,3 +56,7 @@
   bottom: 0;
   right: 0;
 }
+
+textarea#lyrics {
+  height: 24rem;
+}
