@@ -40,17 +40,17 @@ export function BrowseView({ songs }: Props) {
       {genres.map(({ genre }, index) =>
         <button onClick={() => filter(genre)} key={index} className="p-1 mx-2 rounded border btn btn-light">{genre}</button>
       )}
-      <button onClick={reset} className="p-1 mx-2 rounded border btn btn-danger">Resetear</button>
+      <button onClick={reset} className="p-1 mx-2 rounded border btn btn-warning">Resetear</button>
     </div>
 
     <div className="mt-4 container-fluid d-flex flex-row flex-wrap justify-content-around align-content-center">
-      {fsongs.map(song =>
+      {fsongs ? fsongs.map(song =>
         <div key={song.ID} onClick={() => goToSong(song.ID)} id="song-card" className="d-flex justify-content-center flex-column rounded p-2 m-2">
           <div id="song-card-title" className="text-center py-2">{song.title}</div>
           <div className="text-center text-muted">{song.artist}</div>
           <div className="text-center text-muted pt-2">{song.genre}</div>
         </div>
-      )}
+      ) : null}
     </div>
   </>
 
