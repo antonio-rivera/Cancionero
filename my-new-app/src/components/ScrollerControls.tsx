@@ -15,7 +15,6 @@ export function ScrollerControls({ id }: IDProps) {
     const avgHeight = Math.floor(rootHeight + window.innerHeight) / 2
     clearId = setInterval(() => {
       if (changeSpeed && window.scrollY >= Math.ceil(avgHeight / 2)) {
-        console.log("Changed speed");
 
         switch (interval) {
           case 150:
