@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Song } from "./models/Song";
 import { Header } from "./components/Header"
-import "/Users/antonio/Desktop/WebDevStuff/React/cancionero/my-new-app/bootstrap/css/bootstrap.min.css"
+import "../bootstrap/css/bootstrap.min.css"
 import { SearchForm } from "./components/SearchForm";
 import { Route, Routes } from "react-router-dom";
 import { SongView } from "./components/SongView";
