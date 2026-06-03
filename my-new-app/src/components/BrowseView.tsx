@@ -19,10 +19,11 @@ export function BrowseView({ songs }: Props) {
         for (const song of fsongs) {
           // const artist = stringUtilsModule.replaceSpaceWithPlus(song.artist)
           // const title = stringUtilsModule.replaceSpaceWithPlus(song.title)
-          const term = encodeURIComponent(`${song.artist} ${song.title}`);
-          const searchUrl = `https://itunes.apple.com/search?parameterkeyvaluehttps://itunes.apple.com/search?term=${term}&entity=song`
-          const result = await fetch(searchUrl)
-          console.log(result);
+          const term = encodeURIComponent(`${song.artist.trim()} ${song.title.trim()}`);
+          const searchUrl = `https://itunes.apple.com/search?term=${term}&entity=song&limit=1`;
+          const result = await fetch(searchUrl);
+          const data = await result.json();
+          console.log(data.results[0]);
         }
       }
     }

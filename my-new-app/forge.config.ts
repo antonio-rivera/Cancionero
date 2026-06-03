@@ -21,6 +21,11 @@ const config: ForgeConfig = {
     new AutoUnpackNativesPlugin({}),
     new WebpackPlugin({
       mainConfig,
+      devContentSecurityPolicy:
+        "default-src 'self' 'unsafe-inline' data:; " +
+        "script-src 'self' 'unsafe-eval' 'unsafe-inline' data:; " +
+        "connect-src 'self' https://itunes.apple.com; " +
+        "img-src 'self' data: https:;",
       renderer: {
         config: rendererConfig,
         entryPoints: [
