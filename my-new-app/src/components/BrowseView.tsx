@@ -1,50 +1,69 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Props } from "../../interface";
-import { useEffect, useState } from "react";
 import { Song } from "../models/Song";
-import stringUtilsModule from "../utils/stringUtils";
 
-type genreOutput = { genre: string }
+type genreOutput = { genre: string };
+type ITunesSearchResponse = {
+  results: {
+    artworkUrl100?: string;
+  }[];
+};
 
 export function BrowseView({ songs }: Props) {
+  const navigate = useNavigate();
   const [genres, setGenres] = useState<genreOutput[]>([]);
-  const [fsongs, setFsongs] = useState<Song[]>(songs);
+  const [allSongs, setAllSongs] = useState<Song[]>(songs ?? []);
+  const [fsongs, setFsongs] = useState<Song[]>(songs ?? []);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response: genreOutput[] = await window.DB.getAllGenres()
-      setGenres(response)
-      // Attempt to get album artwork
-      if (fsongs) {
-        for (const song of fsongs) {
-          // const artist = stringUtilsModule.replaceSpaceWithPlus(song.artist)
-          // const title = stringUtilsModule.replaceSpaceWithPlus(song.title)
-          const term = encodeURIComponent(`${song.artist.trim()} ${song.title.trim()}`);
-          const searchUrl = `https://itunes.apple.com/search?term=${term}&entity=song&limit=1`;
-          const result = await fetch(searchUrl);
-          const data = await result.json();
-          console.log(data.results[0]);
-        }
-      }
-    }
-    fetchData()
-  }, [])
+      const response: genreOutput[] = await window.DB.getAllGenres();
+      setGenres(response);
 
-  const navigate = useNavigate();
+      if (!songs) {
+        setAllSongs([]);
+        setFsongs([]);
+        return;
+      }
+
+      const songsWithArtwork = await Promise.all(
+        songs.map(async (song) => {
+          if (song.albumArtwork) {
+            return song;
+          }
+
+          try {
+            const term = encodeURIComponent(`${song.artist.trim()} ${song.title.trim()}`);
+            const searchUrl = `https://itunes.apple.com/search?term=${term}&entity=song&limit=1`;
+            const result = await fetch(searchUrl);
+            const data: ITunesSearchResponse = await result.json();
+            const artworkUrl = data.results[0]?.artworkUrl100;
+
+            return artworkUrl ? { ...song, albumArtwork: artworkUrl } : song;
+          } catch (error) {
+            console.error(`Could not fetch artwork for ${song.artist} - ${song.title}`, error);
+            return song;
+          }
+        })
+      );
+
+      setAllSongs(songsWithArtwork);
+      setFsongs(songsWithArtwork);
+    };
+    fetchData();
+  }, [songs]);
+
   function goToSong(ID: number): void {
-    navigate(`/song/${ID}`)
+    navigate(`/song/${ID}`);
   }
 
   function filter(genre: string) {
-    if (songs) {
-      setFsongs(songs.filter(song => song.genre === genre));
-    }
+    setFsongs(allSongs.filter(song => song.genre === genre));
   }
 
   function reset() {
-    if (songs) {
-      setFsongs(songs);
-    }
+    setFsongs(allSongs);
   }
 
   return <>
@@ -57,13 +76,16 @@ export function BrowseView({ songs }: Props) {
     </div>
 
     <div className="mt-4 container-fluid d-flex flex-row flex-wrap justify-content-around align-content-center">
-      {fsongs ? fsongs.map(song =>
+      {fsongs.map(song =>
         <div key={song.ID} onClick={() => goToSong(song.ID)} id="song-card" className="d-flex justify-content-center flex-column rounded p-2 m-2">
+          {song.albumArtwork ? (
+            <img className="mx-auto mb-2 rounded" src={song.albumArtwork} alt={`${song.title} artwork`} />
+          ) : null}
           <div id="song-card-title" className="text-center py-2">{song.title}</div>
           <div className="text-center text-muted">{song.artist}</div>
           <div className="text-center text-muted pt-2">{song.genre}</div>
         </div>
-      ) : null}
+      )}
     </div>
   </>
 

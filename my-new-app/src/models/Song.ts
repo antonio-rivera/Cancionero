@@ -4,7 +4,7 @@ export class Song {
   lyrics: string
   genre: string
   artist: string
-  albumArtwork?: URL
+  albumArtwork?: string
   constructor({ ID, title, lyrics, genre, artist }: any) {
     this.ID = ID;
     this.title = title;
