@@ -33,8 +33,6 @@ export class SongRepository {
             db.close((err) => {
                 if (err) {
                     console.error(err.message);
-                } else {
-                    console.log('Database connection closed.');
                 }
             });
             return rows; // Return the retrieved rows
@@ -136,7 +134,6 @@ export class SongRepository {
 
         try {
             const result = await runAsync(query, [songToEdit.title, songToEdit.lyrics, songToEdit.genre, songToEdit.artist, songToEdit.ID.toString()]);
-            console.log("Update successfully executed");
         } catch (error) {
             console.error('Error inserting data:', error);
         } finally {
@@ -165,7 +162,6 @@ export class SongRepository {
 
         try {
             const result = await runAsync(query, [id.toString()]);
-            console.log("Delete successfully executed");
         } catch (error) {
             console.error('Error data:', error);
         } finally {
