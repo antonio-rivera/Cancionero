@@ -23,6 +23,9 @@ export function ScrollerControls({ id }: IDProps) {
           case 100:
             startAutoScroll(interval - 30, false);
             break;
+          case 75:
+            startAutoScroll(interval - 20, false);
+            break;
           case 50:
             startAutoScroll(interval - 25, false);
             break;
@@ -53,8 +56,10 @@ export function ScrollerControls({ id }: IDProps) {
       <Link to={`/edit/${id}`}><button id="edit-btn" className="mx-1 btn btn-success">Editar Canción</button> </Link>
       <div className="d-flex justify-content-center align-items-center">
         <div className="h5 text-dark text-center mr-3">Desplazamiento: </div>
+        <button onClick={() => window.scrollTo(0, 0)} className=" btn btn-warning rounded">Reiniciar</button>
         <button onClick={() => startAutoScroll(150)} className=" btn btn-outline-dark rounded">Velocidad 1.0</button>
         <button onClick={() => startAutoScroll(100)} className=" btn btn-outline-dark rounded">Velocidad 2.0</button>
+        <button onClick={() => startAutoScroll(75)} className=" btn btn-outline-dark rounded">Velocidad 2.5</button>
         <button onClick={() => startAutoScroll(50)} className=" btn btn-outline-dark rounded">Velocidad 3.0</button>
         <button onClick={stopScrolling} className=" btn btn-danger rounded mr-1">Detener</button>
       </div>
