@@ -1,11 +1,11 @@
-export class Song  {
+export class Song {
   ID: number
   title: string
   lyrics: string
   genre: string
   artist: string
-  constructor({ID, title, lyrics, genre, artist}: any)
-  {
+  albumArtwork?: URL
+  constructor({ ID, title, lyrics, genre, artist }: any) {
     this.ID = ID;
     this.title = title;
     this.lyrics = lyrics;

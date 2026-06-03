@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Props } from "../../interface";
 import { useEffect, useState } from "react";
 import { Song } from "../models/Song";
+import stringUtilsModule from "../utils/stringUtils";
 
 type genreOutput = { genre: string }
 
@@ -13,6 +14,17 @@ export function BrowseView({ songs }: Props) {
     const fetchData = async () => {
       const response: genreOutput[] = await window.DB.getAllGenres()
       setGenres(response)
+      // Attempt to get album artwork
+      if (fsongs) {
+        for (const song of fsongs) {
+          // const artist = stringUtilsModule.replaceSpaceWithPlus(song.artist)
+          // const title = stringUtilsModule.replaceSpaceWithPlus(song.title)
+          const term = encodeURIComponent(`${song.artist} ${song.title}`);
+          const searchUrl = `https://itunes.apple.com/search?parameterkeyvaluehttps://itunes.apple.com/search?term=${term}&entity=song`
+          const result = await fetch(searchUrl)
+          console.log(result);
+        }
+      }
     }
     fetchData()
   }, [])
