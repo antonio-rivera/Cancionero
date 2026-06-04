@@ -5,17 +5,38 @@ export interface SongProp {
   goToSong: (ID: number) => void
 }
 export default function SongCard({ song, goToSong }: SongProp) {
+  const hasArtwork = Boolean(song.albumArtwork);
+  const openSong = () => goToSong(song.ID);
 
 
   return (
     <>
-      <div onClick={() => goToSong(song.ID)} id="song-card" className="d-flex justify-content-center flex-column rounded p-2 m-2">
-        {song.albumArtwork ? (
-          <img className="mx-auto mb-2 rounded" src={song.albumArtwork} alt={`${song.title} artwork`} />
-        ) : null}
-        <div id="song-card-title" className="text-center py-2">{song.title}</div>
-        <div className="text-center text-muted">{song.artist}</div>
-        <div className="text-center text-muted pt-2">{song.genre}</div>
+      <div
+        onClick={openSong}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openSong();
+          }
+        }}
+        className={`song-card ${hasArtwork ? "song-card--with-artwork" : "song-card--empty"}`}
+        role="button"
+        aria-label={`Open ${song.title} by ${song.artist}`}
+        tabIndex={0}
+      >
+        {hasArtwork ? (
+          <img className="song-card__artwork" src={song.albumArtwork} alt={`${song.title} artwork`} />
+        ) : (
+          <div className="song-card__placeholder">
+            <div className="song-card__placeholder-title">{song.title}</div>
+            <div className="song-card__placeholder-artist">{song.artist}</div>
+          </div>
+        )}
+        <div className="song-card__details">
+          <div className="song-card__title">{song.title}</div>
+          <div className="song-card__artist">{song.artist}</div>
+          {!hasArtwork ? <div className="song-card__genre">{song.genre}</div> : null}
+        </div>
       </div>
     </>
   );
