@@ -48,7 +48,7 @@ export function SongForm({ handleInputChange, handleSubmit, formData }: FormProp
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit" className="mb-2 btn btn-primary">Someter</button>
+        <button type="submit" className="mb-2 btn btn-dark">Someter</button>
       </form>
     </div>
   );

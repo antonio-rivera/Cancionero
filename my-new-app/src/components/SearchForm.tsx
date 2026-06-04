@@ -34,7 +34,7 @@ export function SearchForm({ songs }: Props) {
       <h3 className="pb-2">Busqueda</h3>
       <input placeholder="Busca aqui la informacion de la cancion..." className="form-control w-75 mx-auto" type="search" name="search"
         id="search" value={query} onChange={(event => setQuery(event.target.value))} />
-      <button className="btn btn-primary mt-3" id="search-button" type="submit" onClick={(event) => handleSubmit(event)}>Buscar</button>
+      <button className="btn btn-dark mt-3" id="search-button" type="submit" onClick={(event) => handleSubmit(event)}>Buscar</button>
     </form>
       <TableResults haveResults={haveResults} results={searchResults} />
       {foundText}

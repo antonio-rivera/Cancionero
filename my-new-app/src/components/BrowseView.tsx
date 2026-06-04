@@ -68,7 +68,7 @@ export function BrowseView({ songs }: Props) {
   }
 
   return <>
-    <div id="filter-bar" className="py-2 bg-primary d-flex flex-wrap align-items-center">
+    <div id="filter-bar" className="py-2 bg-dark d-flex flex-wrap align-items-center">
       <span className="h5 text-white px-2">Generos: </span>
       {genres.map(({ genre }, index) =>
         <button onClick={() => filter(genre)} key={index} className="p-1 mx-2 rounded border btn btn-light">{genre}</button>
