@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Props } from "../../interface";
 import { Song } from "../models/Song";
+import SongCard from "./SongCard";
+import { Props } from "../../interface";
 
 type genreOutput = { genre: string };
 type ITunesSearchResponse = {
@@ -28,7 +29,7 @@ export function BrowseView({ songs }: Props) {
       }
 
       const songsWithArtwork = await Promise.all(
-        songs.map(async (song) => {
+        songs.map(async (song: Song) => {
           if (song.albumArtwork) {
             return song;
           }
@@ -76,16 +77,7 @@ export function BrowseView({ songs }: Props) {
     </div>
 
     <div className="mt-4 container-fluid d-flex flex-row flex-wrap justify-content-around align-content-center">
-      {fsongs.map(song =>
-        <div key={song.ID} onClick={() => goToSong(song.ID)} id="song-card" className="d-flex justify-content-center flex-column rounded p-2 m-2">
-          {song.albumArtwork ? (
-            <img className="mx-auto mb-2 rounded" src={song.albumArtwork} alt={`${song.title} artwork`} />
-          ) : null}
-          <div id="song-card-title" className="text-center py-2">{song.title}</div>
-          <div className="text-center text-muted">{song.artist}</div>
-          <div className="text-center text-muted pt-2">{song.genre}</div>
-        </div>
-      )}
+      {fsongs.map(song => <SongCard key={song.ID} song={song} goToSong={goToSong} />)}
     </div>
   </>
 
