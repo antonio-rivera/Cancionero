@@ -35,7 +35,7 @@ export default function SongCard({ song, goToSong }: SongProp) {
         <div className="song-card__details">
           <div className="song-card__title">{song.title}</div>
           <div className="song-card__artist">{song.artist}</div>
-          {!hasArtwork ? <div className="song-card__genre">{song.genre}</div> : null}
+          <div className="song-card__genre">{song.genre}</div>
         </div>
       </div>
     </>
