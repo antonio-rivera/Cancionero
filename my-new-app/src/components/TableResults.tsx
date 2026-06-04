@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Song } from "../models/Song"
-
+import { useNavigate } from "react-router-dom";
 type Props =
   {
     results: Array<Song>;
@@ -8,29 +8,27 @@ type Props =
   }
 
 export function TableResults({ haveResults, results }: Props) {
+  const navigate = useNavigate();
   if (haveResults) {
     return (
-      <table className="table w-75 mx-auto">
+      <table className="table table-hover w-75 mx-auto">
         <thead>
           <tr>
             <th scope="col">Titulo</th>
             <th scope="col">Artista</th>
             <th scope="col">Genero</th>
           </tr>
+        </thead>
+        <tbody>
           {results.map(song =>
-            <tr key={song.ID}>
+            <tr onClick={() => navigate(`song/${song.ID}`)} key={song.ID}>
               <td className="link-primary">
-                <Link to={`song/${song.ID}`}>
-                  {song.title}
-                </Link>
+                {song.title}
               </td>
               <td>{song.artist}</td>
               <td>{song.genre}</td>
             </tr>
           )}
-        </thead>
-        <tbody>
-
         </tbody>
       </table>
     )
