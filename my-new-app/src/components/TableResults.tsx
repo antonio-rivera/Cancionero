@@ -22,7 +22,7 @@ export function TableResults({ haveResults, results }: Props) {
         <tbody>
           {results.map(song =>
             <tr onClick={() => navigate(`song/${song.ID}`)} key={song.ID}>
-              <td className="link-dark">
+              <td className="link-primary">
                 {song.title}
               </td>
               <td>{song.artist}</td>

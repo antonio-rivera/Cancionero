@@ -3,16 +3,6 @@
   src: url("./assets/Roboto/Roboto-Light.ttf");
 }
 
-#root,
-html {
-  height: 100vh;
-  z-index: -1;
-  background-color: #0f2027; /* Fallback */
-  background-color: #141e30;
-  background: linear-gradient(to right, #141e30, #243b55);
-  color: aliceblue;
-}
-
 .song-card {
   width: 12.5rem;
   min-height: 17rem;
