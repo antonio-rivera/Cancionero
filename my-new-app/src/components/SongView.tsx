@@ -1,9 +1,20 @@
 import { Props } from "../../interface"
 import { useParams } from "react-router-dom"
 import { ScrollerControls } from "./ScrollerControls";
+import { useState } from "react";
 export function SongView({ songs }: Props) {
 
   const { id } = useParams()
+  const [lyricsSize, setLyricsSize] = useState(2.5)
+
+  function changeLyricsSize(buttonPressed: string) {
+    if (buttonPressed === "Up") {
+      setLyricsSize(prevLyricsSize => prevLyricsSize + 0.1)
+    }
+    else {
+      setLyricsSize(prevLyricsSize => prevLyricsSize - 0.1)
+    }
+  }
 
   if (songs) {
     const currentSong = songs.find(song => song.ID === Number(id))
@@ -14,11 +25,12 @@ export function SongView({ songs }: Props) {
         <div className="mt-4 container-fluid">
           <h1 className="text-center">{title}</h1>
           <h3 className="text-center">{artist}</h3>
-          <p id="p-lyrics" className="pt-2 pb-5 text-center">
+          <p id="p-lyrics" style={{ "fontSize": lyricsSize.toString() + "rem" }} className="pt-2 pb-5 text-center">
             {lyrics}
           </p>
         </div>
-        <ScrollerControls id={id} />
+        <ScrollerControls changeLyricsSize={changeLyricsSize} id={id} />
+
       </>
 
     }

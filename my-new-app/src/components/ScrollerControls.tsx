@@ -1,7 +1,12 @@
 import { IDProps } from "../../interface";
 import { Link } from "react-router-dom";
 
-export function ScrollerControls({ id }: IDProps) {
+export interface ScrollerControlsProps {
+  id: string | undefined,
+  changeLyricsSize: (buttonPressed: string) => void
+}
+
+export function ScrollerControls({ id, changeLyricsSize }: ScrollerControlsProps) {
   window.scrollTo(0, 0);
   let clearId: string | number | NodeJS.Timeout;
   let startedScrolling: boolean = false;
@@ -52,8 +57,13 @@ export function ScrollerControls({ id }: IDProps) {
     }
   }
   return <>
-    <div id="song-footer" className="d-flex justify-content-between align-items-center">
+    <div id="song-footer" className="d-flex container-fluid justify-content-center align-items-center">
       <Link to={`/edit/${id}`}><button id="edit-btn" className="mx-1 btn btn-success">Editar Canción</button> </Link>
+      <div className="m-2 font-buttons container text-center text-white">
+        <h3 className="h5 text-dark">Agrandar o Achicar Letra</h3>
+        <button onClick={() => changeLyricsSize("Up")} className="btn btn-outline-success rounded">Agrandar</button>
+        <button onClick={() => changeLyricsSize("Down")} className="btn btn-outline-success rounded">Achicar</button>
+      </div>
       <div className="d-flex justify-content-center align-items-center">
         <div className="h5 text-center mr-3">Desplazamiento: </div>
         <button onClick={() => { stopScrolling(); window.scrollTo(0, 0) }} className=" btn btn-warning rounded">Reiniciar</button>
