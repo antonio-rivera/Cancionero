@@ -15,11 +15,12 @@ jobs:
           node-version: 22
 
       - run: npm ci
+        working-directory: my-new-app
 
       - run: npm run make
-      - uses: actions/upload-artifact@v4
+        working-directory: my-new-app
 
+      - uses: actions/upload-artifact@v4
         with:
           name: windows-build
-
-          path: out/make/**
+          path: my-new-app/out/make/**
