@@ -22,12 +22,14 @@ export function SongView({ songs }: Props) {
     if (currentSong) {
       const { title, artist, lyrics } = currentSong;
       return <>
-        <div className="mt-4 container-fluid">
+        <div className="my-4 pb-5 container-fluid">
           <h1 className="text-center">{title}</h1>
           <h3 className="text-center">{artist}</h3>
           <p id="p-lyrics" style={{ "fontSize": lyricsSize.toString() + "rem" }} className="pt-2 pb-5 text-center">
             {lyrics}
           </p>
+          <hr />
+          <p className="text-center text-muted h5 p-3">Fin</p>
         </div>
         <ScrollerControls changeLyricsSize={changeLyricsSize} id={id} />
 
