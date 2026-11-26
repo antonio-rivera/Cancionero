@@ -34,13 +34,14 @@ export function ScrollerControls({ id, changeLyricsSize }: ScrollerControlsProps
 
   function startAutoScroll(pixelsPerSecond: number) {
     stopScrolling();
-    const scroller = document.scrollingElement;
-    if (!scroller) {
-      return;
-    }
-
     let previousTimestamp = performance.now();
     function scrollFrame(timestamp: number) {
+      const scroller = document.scrollingElement;
+      if (scroller === null) {
+        stopScrolling();
+        return;
+      }
+
       const elapsedSeconds = Math.min((timestamp - previousTimestamp) / 1000, 0.1);
       previousTimestamp = timestamp;
 
