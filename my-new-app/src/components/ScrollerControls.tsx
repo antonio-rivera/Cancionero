@@ -30,6 +30,17 @@ export function ScrollerControls({ id, changeLyricsSize }: ScrollerControlsProps
       return;
     }
     intervalId.current = setInterval(() => {
+      // Spacebar should stop scrolling, so we check if the user is pressing it
+      document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space') {
+      // Optional: prevents the page from scrolling down
+      event.preventDefault(); 
+      stopScrolling();
+      return;
+  }
+});
+
+
       const previousScrollTop = scroller.scrollTop;
       scroller.scrollTop = previousScrollTop + velocity;
 
