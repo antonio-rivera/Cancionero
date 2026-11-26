@@ -83,10 +83,10 @@ export function ScrollerControls({ id, changeLyricsSize }: ScrollerControlsProps
       <div className="d-flex justify-content-center align-items-center">
         <div className="h5 text-center mr-3">Desplazamiento: </div>
         <button onClick={() => { stopScrolling(); if (document.scrollingElement) document.scrollingElement.scrollTop = 0 }} className=" btn btn-warning rounded">Reiniciar</button>
-        <button onClick={() => startAutoScroll(30)} className=" btn btn-outline-primary rounded">Velocidad 1.0</button>
-        <button onClick={() => startAutoScroll(45)} className=" btn btn-outline-primary rounded">Velocidad 2.0</button>
-        <button onClick={() => startAutoScroll(60)} className=" btn btn-outline-primary rounded">Velocidad 2.5</button>
-        <button onClick={() => startAutoScroll(90)} className=" btn btn-outline-primary rounded">Velocidad 3.0</button>
+        <button onClick={() => startAutoScroll(15)} className=" btn btn-outline-primary rounded">Velocidad 1.0</button>
+        <button onClick={() => startAutoScroll(45/2)} className=" btn btn-outline-primary rounded">Velocidad 2.0</button>
+        <button onClick={() => startAutoScroll(30)} className=" btn btn-outline-primary rounded">Velocidad 2.5</button>
+        <button onClick={() => startAutoScroll(45)} className=" btn btn-outline-primary rounded">Velocidad 3.0</button>
         <button onClick={stopScrolling} className=" btn btn-danger rounded mr-1">Detener</button>
       </div>
     </div>
