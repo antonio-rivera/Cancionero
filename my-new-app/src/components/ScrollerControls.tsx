@@ -7,7 +7,7 @@ export interface ScrollerControlsProps {
 }
 
 export function ScrollerControls({ id, changeLyricsSize }: ScrollerControlsProps) {
-  const intervalId = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
+  const animationFrameId = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const scroller = document.scrollingElement;
@@ -15,50 +15,53 @@ export function ScrollerControls({ id, changeLyricsSize }: ScrollerControlsProps
       scroller.scrollTop = 0;
     }
 
-      // Spacebar should stop scrolling, so we check if the user is pressing it
-      document.addEventListener('keydown', (event) => {
+    function handleKeyDown(event: KeyboardEvent) {
       if (event.code === 'Space') {
-        // Optional: prevents the page from scrolling down
-        event.preventDefault(); 
+        event.preventDefault();
         stopScrolling();
-        return;
-  }
-});
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+
     return () => {
-      if (intervalId.current !== undefined) {
-        clearInterval(intervalId.current);
-        document.removeEventListener('keydown', (event) => {
-          if (event.code === 'Space') {
-            event.preventDefault(); 
-            stopScrolling();
-            return;
-          }
-        });
+      document.removeEventListener('keydown', handleKeyDown);
+      if (animationFrameId.current !== undefined) {
+        cancelAnimationFrame(animationFrameId.current);
       }
     };
   }, []);
 
-  function startAutoScroll(interval: number) {
-    const velocity = 1;
+  function startAutoScroll(pixelsPerSecond: number) {
     stopScrolling();
     const scroller = document.scrollingElement;
     if (!scroller) {
       return;
     }
-    intervalId.current = setInterval(() => {
+
+    let previousTimestamp = performance.now();
+    function scrollFrame(timestamp: number) {
+      const elapsedSeconds = Math.min((timestamp - previousTimestamp) / 1000, 0.1);
+      previousTimestamp = timestamp;
+
       const previousScrollTop = scroller.scrollTop;
-      scroller.scrollTop = previousScrollTop + velocity;
+      scroller.scrollTop = previousScrollTop + pixelsPerSecond * elapsedSeconds;
 
       if (scroller.scrollTop <= previousScrollTop) {
         stopScrolling();
+        return;
       }
-    }, interval)
+
+      animationFrameId.current = requestAnimationFrame(scrollFrame);
+    }
+
+    animationFrameId.current = requestAnimationFrame(scrollFrame);
   }
 
   function stopScrolling() {
-    if (intervalId.current !== undefined) {
-      clearInterval(intervalId.current);
-      intervalId.current = undefined;
+    if (animationFrameId.current !== undefined) {
+      cancelAnimationFrame(animationFrameId.current);
+      animationFrameId.current = undefined;
     }
   }
   return <>
@@ -72,10 +75,10 @@ export function ScrollerControls({ id, changeLyricsSize }: ScrollerControlsProps
       <div className="d-flex justify-content-center align-items-center">
         <div className="h5 text-center mr-3">Desplazamiento: </div>
         <button onClick={() => { stopScrolling(); if (document.scrollingElement) document.scrollingElement.scrollTop = 0 }} className=" btn btn-warning rounded">Reiniciar</button>
-        <button onClick={() => startAutoScroll(150)} className=" btn btn-outline-primary rounded">Velocidad 1.0</button>
-        <button onClick={() => startAutoScroll(100)} className=" btn btn-outline-primary rounded">Velocidad 2.0</button>
-        <button onClick={() => startAutoScroll(75)} className=" btn btn-outline-primary rounded">Velocidad 2.5</button>
-        <button onClick={() => startAutoScroll(50)} className=" btn btn-outline-primary rounded">Velocidad 3.0</button>
+        <button onClick={() => startAutoScroll(30)} className=" btn btn-outline-primary rounded">Velocidad 1.0</button>
+        <button onClick={() => startAutoScroll(45)} className=" btn btn-outline-primary rounded">Velocidad 2.0</button>
+        <button onClick={() => startAutoScroll(60)} className=" btn btn-outline-primary rounded">Velocidad 2.5</button>
+        <button onClick={() => startAutoScroll(90)} className=" btn btn-outline-primary rounded">Velocidad 3.0</button>
         <button onClick={stopScrolling} className=" btn btn-danger rounded mr-1">Detener</button>
       </div>
     </div>
