@@ -35,6 +35,8 @@ export function ScrollerControls({ id, changeLyricsSize }: ScrollerControlsProps
   function startAutoScroll(pixelsPerSecond: number) {
     stopScrolling();
     let previousTimestamp = performance.now();
+    let pendingPixels = 0;
+
     function scrollFrame(timestamp: number) {
       const scroller = document.scrollingElement;
       if (scroller === null) {
@@ -44,11 +46,16 @@ export function ScrollerControls({ id, changeLyricsSize }: ScrollerControlsProps
 
       const elapsedSeconds = Math.min((timestamp - previousTimestamp) / 1000, 0.1);
       previousTimestamp = timestamp;
+      pendingPixels += pixelsPerSecond * elapsedSeconds;
 
-      const previousScrollTop = scroller.scrollTop;
-      scroller.scrollTop = previousScrollTop + pixelsPerSecond * elapsedSeconds;
+      const maxScrollTop = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+      const wholePixels = Math.floor(pendingPixels);
+      if (wholePixels > 0) {
+        scroller.scrollTop = Math.min(scroller.scrollTop + wholePixels, maxScrollTop);
+        pendingPixels -= wholePixels;
+      }
 
-      if (scroller.scrollTop <= previousScrollTop) {
+      if (scroller.scrollTop >= maxScrollTop) {
         stopScrolling();
         return;
       }
