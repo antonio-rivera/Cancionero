@@ -22,36 +22,14 @@ export function ScrollerControls({ id, changeLyricsSize }: ScrollerControlsProps
     };
   }, []);
 
-  function startAutoScroll(interval: number, changeSpeed = true) {
+  function startAutoScroll(interval: number) {
     const velocity = 1;
     stopScrolling();
     const scroller = document.scrollingElement;
     if (!scroller) {
       return;
     }
-    const rootHeight = document.getElementById("root")?.scrollHeight ?? scroller.scrollHeight;
-    const avgHeight = Math.floor(rootHeight + window.innerHeight) / 2;
     intervalId.current = setInterval(() => {
-      if (changeSpeed && scroller.scrollTop >= Math.ceil(avgHeight / 2)) {
-
-        switch (interval) {
-          case 150:
-            startAutoScroll(interval - 40, false);
-            break;
-          case 100:
-            startAutoScroll(interval - 30, false);
-            break;
-          case 75:
-            startAutoScroll(interval - 20, false);
-            break;
-          case 50:
-            startAutoScroll(interval - 25, false);
-            break;
-          default:
-            break;
-        }
-        return;
-      }
       const previousScrollTop = scroller.scrollTop;
       scroller.scrollTop = previousScrollTop + velocity;
 
